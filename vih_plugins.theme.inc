@@ -1,0 +1,90 @@
+<?php
+
+/**
+ * Theme functions for restaurant_plugins.
+ */
+
+/**
+ * Implements hook_preprocess().
+ * @ingroup themeable
+ */
+function vih_plugins_preprocess(&$variables, $hook) {
+  if (isset($variables['layout']) && isset($variables['renderer'])) {
+    $variables['extra_classes_array'] = array();
+    $regions = array_keys($variables['layout']['regions']);
+    foreach ($regions as $region) {
+      $variables['extra_classes_array'][$region] = array();
+
+      // If a region is empty, add an extra class to it.
+      if (!isset($variables['display']->panels[$region])) {
+        $variables['extra_classes_array'][$region][] = 'panel-pane-region-empty';
+      }
+    }
+
+    // Make extra classes printable.
+    foreach ($variables['extra_classes_array'] as $key => $extra_classes) {
+      $variables['extra_classes'][$key] = implode(" ", $extra_classes);
+    }
+  }
+}
+
+/**
+ * Implements hook_preprocess_html().
+ * @ingroup themeable
+ */
+function vih_plugins_preprocess_html(&$variables) {
+  $page = page_manager_get_current_page();
+  if ($page) {
+    // Add a custom panel class
+    $variables['classes_array'][] = 'page-is-panel';
+
+    // Add a custom class for each region inside the panel page.
+    if (isset($page['handler']->conf['display'])) {
+      foreach ($page['handler']->conf['display']->panels as $region_name => $region) {
+        if (count($region)) {
+          $variables['classes_array'][] = 'page-with-region-' . $region_name;
+        }
+      }
+    }
+  }
+  else {
+    // Add a custom panel class
+    $variables['classes_array'][] = 'page-is-not-panel';
+  }
+}
+
+/**
+ * template_preprocess_contact_info_pane().
+ *
+ * @ingroup themeable
+ */
+function template_preprocess_contact_info_pane(&$variables) {
+  //
+}
+
+/**
+ * template_preprocess_logo_site_name_pane().
+ *
+ * @ingroup themeable
+ */
+function template_preprocess_logo_site_name_pane(&$variables) {
+  // Get a link to the front page.
+  $variables['front_page'] = url();
+
+  // Add the site name to the template.
+  $variables['site_name'] = (theme_get_setting('toggle_name') ? filter_xss_admin(variable_get('site_name', 'Restaurant')) : '');
+
+  // Add the logo to the template.
+  $variables['logo'] = theme('image', array('path' => theme_get_setting('logo')));
+}
+
+/**
+ * template_preprocess_navigation().
+ *
+ * @ingroup themeable
+ */
+function template_preprocess_navigation(&$variables) {
+  // Format and add main menu to template.
+  $variables['main_menu'] = menu_tree(variable_get('menu_main_links_source', 'main-menu'));
+  $variables['main_menu']['#theme_wrappers'] = array('menu_tree__navbar_nav');
+}

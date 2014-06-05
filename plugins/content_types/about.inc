@@ -1,0 +1,148 @@
+<?php
+
+/**
+ * Plugin definition
+ */
+$plugin = array(
+  'title' => t('About'),
+  'description' => t('Displays a sample front page block'),
+  'single' => TRUE,
+  'category' => array(t('Isis One')),
+  'render callback' => 'vih_plugins_about_block_content_type_render',
+);
+
+/**
+ * Render Callback
+ */
+function vih_plugins_about_block_content_type_render($subtype, $conf, $args, $context) {
+  $block = new stdClass();
+  $block->content = '<!-- ABOUT -->
+<section id="about">
+
+        <header class="text-center">
+            <h1>ABOUT US</h1>
+        </header>
+
+        <div class="divider"><!-- lines divider --></div>
+
+        <article class="text-center big-paragraph">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas metus nulla, commodo a sodales sed, dignissim pretium nunc. Nam et lacus neque. Ut enim massa, sodales tempor convallis et, iaculis ac massa.</p>
+        </article>
+
+        <div class="me-picture text-center animate_fade_in">
+
+            <!-- ITEM -->
+            <div class="item">
+
+                <!-- social icons -->
+						<span class="socials animated bounceIn">
+							<a target="_blank" href="#" class="social fa fa-facebook"></a>
+							<a target="_blank" href="#" class="social fa fa-twitter"></a>
+							<a target="_blank" href="#" class="social fa fa-google-plus"></a>
+						</span>
+
+                <!-- image -->
+                <img class="img-responsive" src="sites/all/themes/isis_one/assets/images/preview/content/people/1.jpg" width="200" height="200" alt="" />
+
+                <!-- name -->
+                <div class="member-name">
+                    <h3>
+                        Jenny Doe
+                        <small>MARKETING</small>
+                    </h3>
+                </div>
+
+            </div>
+            <!-- /ITEM -->
+
+            <!-- ITEM -->
+            <div class="item">
+
+                <!-- social icons -->
+						<span class="socials animated bounceIn">
+							<a target="_blank" href="#" class="social fa fa-facebook"></a>
+							<a target="_blank" href="#" class="social fa fa-twitter"></a>
+							<a target="_blank" href="#" class="social fa fa-google-plus"></a>
+						</span>
+
+                <!-- image -->
+                <img class="img-responsive" src="sites/all/themes/isis_one/assets/images/preview/content/people/2.jpg" width="200" height="200" alt="" />
+
+                <!-- name -->
+                <div class="member-name">
+                    <h3>
+                        Christina Doe
+                        <small>CEO</small>
+                    </h3>
+                </div>
+
+            </div>
+            <!-- /ITEM -->
+
+            <!-- ITEM -->
+            <div class="item">
+
+                <!-- social icons -->
+						<span class="socials animated bounceIn">
+							<a target="_blank" href="#" class="social fa fa-facebook"></a>
+							<a target="_blank" href="#" class="social fa fa-twitter"></a>
+							<a target="_blank" href="#" class="social fa fa-google-plus"></a>
+						</span>
+
+                <!-- image -->
+                <img class="img-responsive" src="sites/all/themes/isis_one/assets/images/preview/content/people/3.jpg" width="200" height="200" alt="" />
+
+                <!-- name -->
+                <div class="member-name">
+                    <h3>
+                        John Doe
+                        <small>DIRECTOR</small>
+                    </h3>
+                </div>
+
+            </div>
+            <!-- /ITEM -->
+
+        </div>
+
+
+        <article>
+            <div class="row text-left">
+
+                <!-- Passion -->
+                <div class="col-md-4">
+                    <h3>Passion</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas metus nulla, commodo a sodales sed, dignissim pretium nunc. Nam et lacus neque. Ut enim massa, sodales tempor convallis et, iaculis ac massa. Etiam suscipit nisl eget lorem pellentesque quis iaculis mi mattis.</p>
+                </div>
+
+
+                <!-- Precision -->
+                <div class="col-md-4">
+                    <h3>Precision</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas metus nulla, commodo a sodales sed, dignissim pretium nunc. Nam et lacus neque. Ut enim massa, sodales tempor convallis et, iaculis ac massa. Etiam suscipit nisl eget lorem pellentesque quis iaculis mi mattis.</p>
+                </div>
+
+
+                <!-- Simplicity -->
+                <div class="col-md-4">
+                    <h3>Simplicity</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas metus nulla, commodo a sodales sed, dignissim pretium nunc. Nam et lacus neque. Ut enim massa, sodales tempor convallis et, iaculis ac massa. Etiam suscipit nisl eget lorem pellentesque quis iaculis mi mattis.</p>
+                </div>
+
+            </div>
+        </article>
+
+        <!-- curriculum vitae button  -->
+        <!--
+            <article class="curriculum-vitae text-center">
+                <a href="#" class="plusNav">+</a>
+                <p>curriculum vitae</p>
+            </article>
+        -->
+
+
+</section>
+<!-- /ABOUT -->';
+
+  return $block;
+}
