@@ -1,0 +1,14 @@
+<?php
+
+/**
+ * @file
+ * Provides multiple plugins for the VIH
+ */
+
+/**
+ * Implements hook_ctools_plugin_directory().
+ */ 
+function vih_plugins_ctools_plugin_directory($module, $plugin) {
+  return 'plugins/' . $plugin;
+}
+
