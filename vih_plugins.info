@@ -3,3 +3,5 @@ description = Provides multiple plugins for VIH
 core = 7.x
 package = VIH
 project = vih_plugins
+
+dependencies[] = ctools_custom_content
