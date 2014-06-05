@@ -1,3 +1,3 @@
-<div class="vih-box-highlight-region">
-<?php print render($content->content); ?>
+<div<?php print (isset($settings['style'])) ? 'class="' . $settings['style'] . '"' : 'class="alternate"'; ?>>
+  <?php print render($content->content); ?>
 </div>
