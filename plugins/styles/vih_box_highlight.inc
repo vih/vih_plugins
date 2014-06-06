@@ -12,6 +12,7 @@ $plugin =  array(
   'render pane' => 'vih_box_highlight_render_pane',
   'render region' => 'vih_box_highlight_render_region',
   'pane settings form' => 'vih_box_highlight_settings_form',
+  'settings form' => 'vih_box_highlight_region_settings_form',
   'hook theme'    => array(
     'vih_box_highlight_theme_pane' => array(
       'template' => 'vih_box_highlight-pane',
@@ -49,19 +50,22 @@ function theme_vih_box_highlight_render_pane($vars) {
  * Render callback for region
  */
 function theme_vih_box_highlight_render_region($vars) {
-  $settings = $vars['settings'];
+  $style = $vars['settings']['style'];
+
   $content = '';
+
   foreach ($vars['panes'] as $pane_id => $pane_output) {
     $content .= $pane_output;
   }
   if (empty($content)) {
     return;
-  } 
-  return theme('vih_box_highlight_theme_region', array('content' => $content, 'settings' => $settings));
+  }
+
+  return theme('vih_box_highlight_theme_region', array('content' => $content, 'style' => $style));
 }
 
 /**
- * Form call back
+ * Settings form callback.
  */
 function vih_box_highlight_settings_form($style_settings) {
 
@@ -74,6 +78,27 @@ function vih_box_highlight_settings_form($style_settings) {
     ),
     '#default_value' => (isset($style_settings['headline'])) ? $style_settings['headline'] : '',
   );
+
+  $form['style'] = array(
+    '#type' => 'select',
+    '#title' => t('Style'),
+    '#options' => array(
+      '' => t('None'),
+      'emphasis' => t('Emphasis'),
+      'alternate' => t('Alternate'),
+      'boxed' => t('Box'),
+      'jumbotron' => t('Jumbotron'),
+    ),
+    '#default_value' => (isset($style_settings['style'])) ? $style_settings['style'] : 'alternate',
+  );
+
+  return $form;
+}
+
+/**
+ * Settings form callback.
+ */
+function vih_box_highlight_region_settings_form($style_settings) {
 
   $form['style'] = array(
     '#type' => 'select',
