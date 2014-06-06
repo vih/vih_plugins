@@ -12,3 +12,20 @@ function vih_plugins_ctools_plugin_directory($module, $plugin) {
   return 'plugins/' . $plugin;
 }
 
+/**
+ * Implementation of hook_entity_info_alter().
+ */
+function vih_plugins_entity_info_alter(&$entity_info) {
+  $entity_info['fieldable_panels_pane']['bundles']['testimonial'] = array(
+    'label' => t('Add testimonial'),
+    'pane category' => t('VIH Widgets'),
+    'pane top level' => TRUE,
+    // 'pane icon' => drupal_get_path('module', 'panopoly_widgets') . '/images/icon_video.png',
+    'admin' => array(
+      'path' => 'admin/structure/fieldable-panels-panes/manage/%fieldable_panels_panes_type',
+      'bundle argument' => 4,
+      'real path' => 'admin/structure/fieldable-panels-panes/manage/testimonial',
+      'access arguments' => array('administer fieldable panels panes'),
+    ),
+  );
+}

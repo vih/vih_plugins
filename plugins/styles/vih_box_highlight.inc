@@ -27,7 +27,7 @@ $plugin =  array(
       'path' => drupal_get_path('module', 'vih_plugins') .'/plugins/styles',
       'variables' => array(
         'content' => NULL,
-        'settings' => NULL,
+        'style' => NULL,
       ),
     ),
   ),
@@ -50,7 +50,12 @@ function theme_vih_box_highlight_render_pane($vars) {
  * Render callback for region
  */
 function theme_vih_box_highlight_render_region($vars) {
-  $style = $vars['settings']['style'];
+  if (isset($vars['settings']['style'])) {
+    $style = $vars['settings']['style'];
+  }
+  else {
+    $style = '';
+  }
 
   $content = '';
 

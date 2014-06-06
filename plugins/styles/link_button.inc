@@ -18,8 +18,7 @@ $plugin = array(
  * @ingroup themable
  */
 function theme_vih_plugins_link_render_pane($vars) {
-  $settings = $vars['settings'];
   $content = $vars['content'];
-  $output = '<div class="btn-links">' . render($content->content) . '</div>';
+  $output = '<div class="call-to-action-block">' . render($content->content) . '</div>';
   return $output;
 }
