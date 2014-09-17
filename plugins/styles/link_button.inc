@@ -7,7 +7,7 @@
  * Plugin definition.
  */
 $plugin = array(
-  'title' => t('Button'),
+  'title' => t('Links widget as buttons'),
   'description'   => t('Render links list as buttons'),
   'render pane' => 'vih_plugins_link_render_pane',
 );
