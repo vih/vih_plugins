@@ -17,10 +17,13 @@ function vih_plugins_ctools_plugin_directory($module, $plugin) {
  */
 function vih_plugins_theme() {
   return array(
-    'social_widget' => array(
-      'variables' => array('networks' => NULL),
-      'template' => 'templates/social-widget',
-      'file' => 'vih_plugins.theme.inc',
+    'menu_tree__social_links' => array(
+      'render element' => 'tree',
+      'base hook' => 'menu_tree',
     ),
   );
+}
+
+function theme_menu_tree__social_links(&$variables) {
+  return '<ul class="menu links inline list-inline">' . $variables['tree'] . '</ul>';
 }

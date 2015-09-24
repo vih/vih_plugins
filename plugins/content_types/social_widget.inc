@@ -19,22 +19,22 @@ function vih_plugins_get_social_networks() {
     'twitter' => array(
       'title' => t('Twitter'),
       'button_text' => t('Follow us on Twitter'),
-      'default' => 'http://twitter.com/vihdk',
+      'href' => 'http://twitter.com/vihdk',
     ),
     'facebook' => array(
       'title' => t('Facebook'),
       'button_text' => t('Like us on Facebook'),
-      'default' => 'http://facebook.com/vejleih',
+      'href' => 'http://facebook.com/vejleih',
     ),
-    'google_plus' => array(
+    'google-plus' => array(
       'title' => t('Google+'),
       'button_text' => t('Follow us on Google+'),
-      'default' => 'https://plus.google.com/+vejleidr%C3%A6tsh%C3%B8jskole',
+      'href' => 'https://plus.google.com/+vejleidr%C3%A6tsh%C3%B8jskole',
     ),
     'instagram' => array(
       'title' => t('Instagram'),
       'button_text' => t('Follow us on Instagram'),
-      'default' => 'http://instagram.com/vihdk',
+      'href' => 'http://instagram.com/vihdk',
     ),
   );
   return $networks;
@@ -53,9 +53,28 @@ foreach ($networks as $name => $network) {
 function vih_plugins_social_widget_content_type_render($subtype, $conf, $args) {
   $block = new stdClass();
 
-  $block->content = theme('social_widget', array(
-    'networks' => $conf,
-  ));
+  $menu_output = array();
+  $menu_output['#sorted'] = TRUE;
+  $menu_output['#theme_wrappers'][] = 'menu_tree__social_links';
+
+  foreach (vih_plugins_get_social_networks() as $key => $item) {
+    // Create render array for the menu link.
+    $element = array();
+    $element['#theme'] = 'menu_link';
+    $element['#attributes']['class'] = array(
+      'social--links',
+    );
+    $element['#network'] = $key;
+    $element['#title'] = '<i class="fa fa-' . $key . ' fa-2x fa-fw">&nbsp;</i><span class="helper-text element-invisible">' .$item['button_text'] . '</span>';
+    $element['#href'] = $item['href'];
+    $element['#localized_options']  = array('html' => TRUE, 'external' => true, 'target' => '_blank', 'absolute' => true);
+
+    // Add the menu_link item into the render array for the menu_tree.
+    $menu_output[$key] = $element;
+  }
+
+  $block->delta = 'social_widgets';
+  $block->content = $menu_output;
 
   return $block;
 }
