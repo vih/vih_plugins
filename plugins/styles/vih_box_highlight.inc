@@ -32,7 +32,6 @@ $plugin =  array(
     ),
   ),
   'defaults' => array(
-    'headline' => '',
     'style' => 'alternate',
   ),
 );
