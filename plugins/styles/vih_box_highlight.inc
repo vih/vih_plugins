@@ -74,16 +74,6 @@ function theme_vih_box_highlight_render_region($vars) {
  */
 function vih_box_highlight_settings_form($style_settings) {
 
-  $form['headline'] = array(
-    '#type' => 'select',
-    '#title' => t('Headline'),
-    '#options' => array(
-      '' => t('None'),
-      'emphasis' => t('Emphasis'),
-    ),
-    '#default_value' => (isset($style_settings['headline'])) ? $style_settings['headline'] : '',
-  );
-
   $form['style'] = array(
     '#type' => 'select',
     '#title' => t('Style'),
