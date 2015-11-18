@@ -7,16 +7,16 @@
  * Plugin definition.
  */
 $plugin = array(
-  'title' => t('Image widget as quote'),
-  'description'   => t('Render image widget as a quote'),
-  'render pane' => 'vih_plugins_quote_render_pane',
-  'pane settings form' => 'vih_plugins_quote_settings_form',
+  'title' => t('Style image widget'),
+  'description'   => t('Render image widget as testimonial or contact person'),
+  'render pane' => 'vih_plugins_image_widget_render_pane',
+  'pane settings form' => 'vih_plugins_image_widget_settings_form',
 );
 
 /**
  * Settings form callback.
  */
-function vih_plugins_quote_settings_form($style_settings) {
+function vih_plugins_image_widget_settings_form($style_settings) {
 
   $form['style'] = array(
     '#type' => 'select',
@@ -37,7 +37,7 @@ function vih_plugins_quote_settings_form($style_settings) {
  *
  * @ingroup themable
  */
-function theme_vih_plugins_quote_render_pane($vars) {
+function theme_vih_image_widget_quote_render_pane($vars) {
   $settings = $vars['settings'];
   $content = $vars['content'];
   $output = '<div class="' . $settings['style'] . ' clearfix">';

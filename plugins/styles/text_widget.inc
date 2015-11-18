@@ -7,9 +7,9 @@
  * Plugin definition.
  */
 $plugin = array(
-  'title' => t('Text widget as call to action'),
-  'description'   => t('Render text pane as a contact CTA'),
-  'render pane' => 'vih_plugins_cta_render_pane',
+  'title' => t('Style text widgets'),
+  'description'   => t('Render text widget making links to a call to action button'),
+  'render pane' => 'vih_plugins_text_widget_render_pane',
 );
 
 /**
@@ -17,7 +17,7 @@ $plugin = array(
  *
  * @ingroup themable
  */
-function theme_vih_plugins_cta_render_pane($vars) {
+function theme_vih_plugins_text_widget_render_pane($vars) {
   $settings = $vars['settings'];
   $content = $vars['content'];
   $output = '<div class="call-to-action-block">';
