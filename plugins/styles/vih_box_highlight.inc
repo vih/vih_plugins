@@ -13,24 +13,6 @@ $plugin =  array(
   'render region' => 'vih_box_highlight_render_region',
   'pane settings form' => 'vih_box_highlight_settings_form',
   'settings form' => 'vih_box_highlight_region_settings_form',
-  'hook theme'    => array(
-    'vih_box_highlight_theme_pane' => array(
-      'template' => 'vih_box_highlight-pane',
-      'path' => drupal_get_path('module', 'vih_plugins') .'/plugins/styles',
-      'variables' => array(
-        'content' => NULL,
-        'settings' => NULL,
-       ),
-    ),
-    'vih_box_highlight_theme_region' => array(
-      'template' => 'vih_box_highlight-region',
-      'path' => drupal_get_path('module', 'vih_plugins') .'/plugins/styles',
-      'variables' => array(
-        'content' => NULL,
-        'style' => NULL,
-      ),
-    ),
-  ),
   'defaults' => array(
     'style' => 'alternate',
   ),
@@ -41,31 +23,25 @@ $plugin =  array(
  */
 function theme_vih_box_highlight_render_pane($vars) {
   $settings = $vars['settings'];
-  $content = $vars['content'];
-  return theme('vih_box_highlight_theme_pane', array('content' => $content, 'settings' => $settings));
+  $pane = $vars['pane'];
+
+  return theme('panels_pane', array(
+    'content' => $vars['content'],
+    'pane' => $pane,
+    'display' => $vars['display'],
+    'settings' => $settings,
+  ));
 }
 
 /**
  * Render callback for region
  */
 function theme_vih_box_highlight_render_region($vars) {
-  if (isset($vars['settings']['style'])) {
-    $style = $vars['settings']['style'];
-  }
-  else {
-    $style = '';
-  }
+  $output = '<div class="' . check_plain($style) . '">';
+  $output .= implode($vars['panes']);
+  $output .= '</div>';
 
-  $content = '';
-
-  foreach ($vars['panes'] as $pane_id => $pane_output) {
-    $content .= $pane_output;
-  }
-  if (empty($content)) {
-    return;
-  }
-
-  return theme('vih_box_highlight_theme_region', array('content' => $content, 'style' => $style));
+  return $output;
 }
 
 /**
